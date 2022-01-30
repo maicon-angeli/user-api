@@ -1,10 +1,12 @@
 package com.zallpy.userapi.dto.request;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.hateoas.RepresentationModel;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -14,8 +16,9 @@ import javax.validation.constraints.Size;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserDTO {
+public class UserDTO extends RepresentationModel<UserDTO> {
 
+    @JsonProperty("id")
     private Long id;
     @NotEmpty
     @Size (min = 2, max = 100)

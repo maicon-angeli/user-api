@@ -9,7 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Collection;
+
 import java.util.List;
 
 @RestController
@@ -22,16 +22,22 @@ public class UserController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public MessageResponseDTO createPerson(@RequestBody @Valid UserDTO userDTO){
+
         return userService.createUser(userDTO);
     }
     @GetMapping("/{id}")
     public UserDTO findById(@PathVariable Long id)throws UserNotFoundException {
         return userService.findById(id);
+
     }
+
     @GetMapping
     @ResponseStatus
-    public List<UserDTO> listALL(){
-        return userService.listALL();
+    public List<UserDTO> listALL()throws UserNotFoundException {
+
+
+      return userService.listALL();
+
     }
 
     @PutMapping("{id}")

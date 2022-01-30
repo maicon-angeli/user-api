@@ -29,11 +29,14 @@ public class UserService {
         UserEntity savedUsurious = userRepository.save(usuriousToSave);
         return createMessageResponse(savedUsurious.getId(), "Updated user with ID ");
     }
-    public List<UserDTO> listALL(){
+    public List<UserDTO> listALL()throws UserNotFoundException{
         List<UserEntity> allUser = userRepository.findAll();
+
         return allUser.stream()
                 .map(userMapper::toDTO)
                 .collect(Collectors.toList());
+
+
 
     }
     public UserDTO findById(Long id) throws UserNotFoundException {
