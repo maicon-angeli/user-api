@@ -29,9 +29,9 @@ public class UserService {
         UserEntity savedUsurious = userRepository.save(usuriousToSave);
         return createMessageResponse(savedUsurious.getId(), "Updated user with ID ");
     }
-    public List<UserDTO> ListALL(){
-        List<UserEntity> allPeople = userRepository.findAll();
-        return allPeople.stream()
+    public List<UserDTO> listALL(){
+        List<UserEntity> allUser = userRepository.findAll();
+        return allUser.stream()
                 .map(userMapper::toDTO)
                 .collect(Collectors.toList());
 

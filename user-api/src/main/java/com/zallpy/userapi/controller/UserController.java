@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Collection;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api")
@@ -26,6 +28,12 @@ public class UserController {
     public UserDTO findById(@PathVariable Long id)throws UserNotFoundException {
         return userService.findById(id);
     }
+    @GetMapping
+    @ResponseStatus
+    public List<UserDTO> listALL(){
+        return userService.listALL();
+    }
+
     @PutMapping("{id}")
     public MessageResponseDTO updateById(@PathVariable Long id,@RequestBody @Valid UserDTO userDTO)throws UserNotFoundException{
         return userService.updateById(id, userDTO);

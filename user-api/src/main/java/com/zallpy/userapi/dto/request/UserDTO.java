@@ -25,7 +25,7 @@ public class UserDTO {
     private String lastName;
     @Email
     private String email;
-    @NotEmpty
+
     private int age;
 
     private String active;
