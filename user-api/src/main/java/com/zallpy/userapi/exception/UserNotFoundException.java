@@ -1,14 +1,17 @@
 package com.zallpy.userapi.exception;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
-@ResponseStatus(HttpStatus.NOT_FOUND)
-public class UserNotFoundException extends Exception {
+@AllArgsConstructor
+@Getter
+public class UserNotFoundException extends RuntimeException {
 
+     protected final HttpStatus status;
+     public UserNotFoundException (HttpStatus status , String message){
+        super(message);
+        this.status = status;
 
-
-    public UserNotFoundException(Long id) {
-        super("User not found with id" + id);
     }
 }

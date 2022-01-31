@@ -18,8 +18,8 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 public class UserDTO extends RepresentationModel<UserDTO> {
 
-    @JsonProperty("id")
-    private Long id;
+
+
     @NotEmpty
     @Size (min = 2, max = 100)
     private String firstName;

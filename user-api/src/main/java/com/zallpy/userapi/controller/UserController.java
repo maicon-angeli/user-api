@@ -26,28 +26,30 @@ public class UserController {
         return userService.createUser(userDTO);
     }
     @GetMapping("/{id}")
-    public UserDTO findById(@PathVariable Long id)throws Exception {
+    public UserDTO findById(@PathVariable Long id) {
         return userService.findById(id);
 
     }
 
     @GetMapping
     @ResponseStatus
-    public List<UserDTO> listALL()throws Exception {
+    public List<UserDTO> listALL() {
+            if(userService.listALL().contains("vanessa")){
 
+            }
 
       return userService.listALL();
 
     }
 
     @PutMapping("{id}")
-    public MessageResponseDTO updateById(@PathVariable Long id,@RequestBody @Valid UserDTO userDTO)throws Exception{
-        return userService.updateById(id, userDTO);
+    public MessageResponseDTO updateById(@RequestBody @Valid UserDTO userDTO){
+        return userService.updateById( userDTO);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public  void deleteById(@PathVariable Long id) throws UserNotFoundException, Exception {
+    public  void deleteById(@PathVariable Long id) {
 
         userService.delete(id);
     }

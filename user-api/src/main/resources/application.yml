@@ -17,4 +17,5 @@ spring:
   jmx:
     server:
       error:
-        include-stacktrace:on_param
+        incluide-stacktrace:
+

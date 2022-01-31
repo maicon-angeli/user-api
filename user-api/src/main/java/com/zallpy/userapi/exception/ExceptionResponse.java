@@ -1,23 +1,19 @@
 package com.zallpy.userapi.exception;
 
+import java.time.LocalDateTime;
+
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import org.springframework.http.HttpStatus;
 
-import java.io.Serializable;
-import java.util.Date;
-
-@Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class ExceptionResponse implements Serializable {
+@Data
+@Builder
+public class ExceptionResponse {
 
-    private static final long serialVersionUID =1L;
-
-    private Date timestamp;
-    private String message;
-    private String details;
-
-
-
+    private String name;
+    private Object cause;
+    private LocalDateTime timestamp;
+    private HttpStatus httpStatus;
 }
