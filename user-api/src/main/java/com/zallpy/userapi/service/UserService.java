@@ -39,20 +39,20 @@ public class UserService {
 
 
     }
-    public UserDTO findById(Long id) throws UserNotFoundException {
+    public UserDTO findById(Long id) throws Exception {
         UserEntity usurious = userRepository.findById(id)
-                .orElseThrow(() -> new UserNotFoundException(id));
+                .orElseThrow(() -> new Exception("User not found"));
 
 
         return userMapper.toDTO(usurious);
     }
-    public void delete(Long id) throws UserNotFoundException{
+    public void delete(Long id) throws UserNotFoundException, Exception{
         verifyIfExists(id);
         userRepository.deleteById(id);
     }
 
 
-    public MessageResponseDTO updateById( Long id, UserDTO personDTO)throws UserNotFoundException {
+    public MessageResponseDTO updateById( Long id, UserDTO personDTO)throws Exception {
         verifyIfExists(id);
         UserEntity usuriousToUpdate = userMapper.toModel(personDTO);
 
