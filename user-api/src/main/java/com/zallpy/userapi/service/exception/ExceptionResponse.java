@@ -1,4 +1,4 @@
-package com.zallpy.userapi.exception;
+package com.zallpy.userapi.service.exception;
 
 import java.time.LocalDateTime;
 

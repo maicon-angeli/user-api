@@ -4,12 +4,12 @@ import com.zallpy.userapi.dto.request.UserDTO;
 import com.zallpy.userapi.entity.UserEntity;
 
 public class UserUtil {
-    private static final String FIRST_NAME = "MAICON";
-    private static final String LAST_NAME = "ANGELI";
-    private static final String EMAIL = "MAICON@EMAIL.COM";
+    private static final String FIRST_NAME = "Maicon";
+    private static final String LAST_NAME = "Angeli";
+    private static final String EMAIL = "maicon@teste.com";
     private static final long PERSON_ID = 1L;
-    private static final int AGE = 32;
-    private static final String ACTIVE = "s";
+    private static final int AGE = 31;
+    private static final String ACTIVE = "S";
 
 
     public static UserDTO createFakeDTO() {

@@ -22,7 +22,8 @@ public class UserServiceTest {
         void testGivenPeopleDTOThenReturnSavedMessage() {
             UserDTO userDTO = UserUtil.createFakeDTO();
             UserEntity expectedSavedUser = UserUtil.createFakeEntity();
-            Mockito.when((UserEntity)this.userRepository.save((UserEntity) ArgumentMatchers.any(UserEntity.class))).thenReturn(expectedSavedUser);
+            Mockito.when((UserEntity)this.userRepository.save((UserEntity) ArgumentMatchers.any(UserEntity.class)))
+                    .thenReturn(expectedSavedUser);
             MessageResponseDTO expectedSuccessMessage = this.createExpectedMessageResponse(expectedSavedUser.getId());
             MessageResponseDTO succesMessage = this.userService.createUser(userDTO);
             Assertions.assertEquals(expectedSuccessMessage, succesMessage);

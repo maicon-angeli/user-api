@@ -1,7 +1,6 @@
 package com.zallpy.userapi.controller;
 import com.zallpy.userapi.dto.request.UserDTO;
 import com.zallpy.userapi.dto.response.MessageResponseDTO;
-import com.zallpy.userapi.exception.UserNotFoundException;
 import com.zallpy.userapi.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +20,7 @@ public class UserController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public MessageResponseDTO createPerson(@RequestBody @Valid UserDTO userDTO){
+    public MessageResponseDTO createUser(@RequestBody @Valid UserDTO userDTO){
 
         return userService.createUser(userDTO);
     }
@@ -34,9 +33,8 @@ public class UserController {
     @GetMapping
     @ResponseStatus
     public List<UserDTO> listALL() {
-            if(userService.listALL().contains("vanessa")){
 
-            }
+
 
       return userService.listALL();
 

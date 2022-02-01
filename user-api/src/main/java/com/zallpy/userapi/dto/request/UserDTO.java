@@ -26,7 +26,6 @@ public class UserDTO extends RepresentationModel<UserDTO> {
     @NotEmpty
     @Size (min = 2, max = 100)
     private String lastName;
-    @Email
     private String email;
 
     private int age;

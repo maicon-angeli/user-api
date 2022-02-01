@@ -5,7 +5,7 @@ package com.zallpy.userapi.service;
 import com.zallpy.userapi.dto.request.UserDTO;
 import com.zallpy.userapi.dto.response.MessageResponseDTO;
 import com.zallpy.userapi.entity.UserEntity;
-import com.zallpy.userapi.exception.UserNotFoundException;
+import com.zallpy.userapi.service.exception.UserNotFoundException;
 import com.zallpy.userapi.mapper.UserMapper;
 import com.zallpy.userapi.repository.UserRepository;
 import lombok.AllArgsConstructor;
