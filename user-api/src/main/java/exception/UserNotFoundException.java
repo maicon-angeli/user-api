@@ -1,4 +1,4 @@
-package com.zallpy.userapi.service.exception;
+package exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

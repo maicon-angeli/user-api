@@ -5,7 +5,7 @@ package com.zallpy.userapi.service;
 import com.zallpy.userapi.dto.request.UserDTO;
 import com.zallpy.userapi.dto.response.MessageResponseDTO;
 import com.zallpy.userapi.entity.UserEntity;
-import com.zallpy.userapi.service.exception.UserNotFoundException;
+import exception.UserNotFoundException;
 import com.zallpy.userapi.mapper.UserMapper;
 import com.zallpy.userapi.repository.UserRepository;
 import lombok.AllArgsConstructor;
@@ -23,13 +23,14 @@ public class UserService {
 
     private final UserMapper userMapper = UserMapper.INSTANCE;
 
+
     public MessageResponseDTO createUser(UserDTO userDTO) {
 
-        return createMessageResponse(userRepository.save(userMapper.toModel(userDTO)).getId(), "Updated user with ID ");
+        return createMessageResponse(userRepository.save(userMapper.toModel(userDTO)).getId()
+                , "Updated user with ID ");
     }
 
     public List<UserDTO> listALL(){
-
         return userRepository.findAll().stream()
                 .map(userMapper::toDTO)
                 .collect(Collectors.toList());
@@ -38,7 +39,6 @@ public class UserService {
     public UserDTO findById(Long id)  {
         UserEntity usurious = userRepository.findById(id)
                 .orElseThrow(()-> new UserNotFoundException(HttpStatus.NOT_FOUND,"Usuário não encontrado"));
-
         return userMapper.toDTO(usurious);
     }
 
@@ -47,9 +47,9 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
-    public MessageResponseDTO updateById(  UserDTO personDTO) {
+    public MessageResponseDTO updateById(  UserDTO userDTO) {
 
-        UserEntity usuriousToUpdate = userMapper.toModel(personDTO);
+        UserEntity usuriousToUpdate = userMapper.toModel(userDTO);
 
         return createMessageResponse(userRepository.save(usuriousToUpdate).getId(), "Updated person with ID ");
     }

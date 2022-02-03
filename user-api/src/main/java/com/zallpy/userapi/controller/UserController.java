@@ -32,7 +32,7 @@ public class UserController {
 
     @GetMapping
     @ResponseStatus
-    public List<UserDTO> listALL() {
+    public List<UserDTO> listallUser() {
 
 
 
@@ -40,7 +40,7 @@ public class UserController {
 
     }
 
-    @PutMapping("{id}")
+    @PutMapping
     public MessageResponseDTO updateById(@RequestBody @Valid UserDTO userDTO){
         return userService.updateById( userDTO);
     }

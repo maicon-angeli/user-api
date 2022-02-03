@@ -6,31 +6,30 @@ import com.zallpy.userapi.entity.UserEntity;
 public class UserUtil {
     private static final String FIRST_NAME = "Maicon";
     private static final String LAST_NAME = "Angeli";
-    private static final String EMAIL = "maicon@teste.com";
-    private static final long PERSON_ID = 1L;
+    private static final String EMAIL = "maicon2@teste.com";
+    private static final Long USER_ENTITY_ID = 9L;
     private static final int AGE = 31;
     private static final String ACTIVE = "S";
 
 
     public static UserDTO createFakeDTO() {
-        return UserDTO
-                .builder()
-                .firstName("MAICON")
-                .lastName("ANGELI")
-                .age(32)
-                .active("s")
-                .email("MAICON@EMAIL.COM")
+        return UserDTO.builder()
+                .firstName(FIRST_NAME)
+                .lastName(LAST_NAME)
+                .age(AGE)
+                .active(ACTIVE)
+                .email(EMAIL)
                 .build();
     }
 
     public static UserEntity createFakeEntity() {
-        return UserEntity
-                .builder()
-                .firstName("MAICON")
-                .lastName("ANGELI")
-                .age(32)
-                .active("s")
-                .email("MAICON@EMAIL.COM")
+        return UserEntity.builder()
+                .id(USER_ENTITY_ID)
+                .firstName(FIRST_NAME)
+                .lastName(LAST_NAME)
+                .age(AGE)
+                .active(ACTIVE)
+                .email(EMAIL)
                 .build();
     }
 }

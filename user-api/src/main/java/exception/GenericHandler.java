@@ -1,4 +1,4 @@
-package com.zallpy.userapi.service.exception;
+package exception;
 
 
 import org.springframework.http.HttpStatus;
