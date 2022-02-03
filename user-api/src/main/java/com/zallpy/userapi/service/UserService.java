@@ -27,7 +27,7 @@ public class UserService {
     public MessageResponseDTO createUser(UserDTO userDTO) {
 
         return createMessageResponse(userRepository.save(userMapper.toModel(userDTO)).getId()
-                , "Updated user with ID ");
+                , "Created user with ID ");
     }
 
     public List<UserDTO> listALL(){
@@ -51,9 +51,9 @@ public class UserService {
 
         UserEntity usuriousToUpdate = userMapper.toModel(userDTO);
 
-        return createMessageResponse(userRepository.save(usuriousToUpdate).getId(), "Updated person with ID ");
+        return createMessageResponse(userRepository.save(usuriousToUpdate).getId(), "Updated user with ID ");
     }
-    private UserEntity verifyIfExists(Long id) throws UserNotFoundException{
+    public UserEntity verifyIfExists(Long id) throws UserNotFoundException{
         return userRepository.findById(id)
                 .orElseThrow(()-> new UserNotFoundException(HttpStatus.NOT_FOUND,"Usuário não encontrado"));
     }

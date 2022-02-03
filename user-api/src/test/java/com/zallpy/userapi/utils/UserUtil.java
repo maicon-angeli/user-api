@@ -2,6 +2,9 @@ package com.zallpy.userapi.utils;
 
 import com.zallpy.userapi.dto.request.UserDTO;
 import com.zallpy.userapi.entity.UserEntity;
+import net.bytebuddy.dynamic.DynamicType;
+
+import java.util.Optional;
 
 public class UserUtil {
     private static final String FIRST_NAME = "Maicon";
@@ -32,6 +35,16 @@ public class UserUtil {
                 .email(EMAIL)
                 .build();
     }
-}
 
+    public static Optional<UserEntity> createFakeEntityOptional(){
+        return Optional.ofNullable(UserEntity.builder()
+                .id(USER_ENTITY_ID)
+                .firstName(FIRST_NAME)
+                .lastName(LAST_NAME)
+                .age(AGE)
+                .active(ACTIVE)
+                .email(EMAIL)
+                .build());
+    }
+}
 
