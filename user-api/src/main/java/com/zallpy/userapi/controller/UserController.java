@@ -4,6 +4,7 @@ import com.zallpy.userapi.dto.response.MessageResponseDTO;
 import com.zallpy.userapi.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.Link;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,7 +13,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping(value = "/api", produces = "application/hal+json")
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class UserController {
     private UserService userService;
@@ -27,6 +28,7 @@ public class UserController {
     @GetMapping("/{id}")
     public UserDTO findById(@PathVariable Long id) {
         return userService.findById(id);
+        resources.add(new Link(uriString, "self"));
 
     }
 
