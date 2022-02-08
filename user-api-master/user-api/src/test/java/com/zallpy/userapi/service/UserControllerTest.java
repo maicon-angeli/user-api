@@ -70,12 +70,12 @@ public class UserControllerTest {
 
     @Test
     public void updateByIdTest() {
-        Mockito.when(this.userService.updateById(UserUtil.createFakeDTO()))
+        Mockito.when(this.userService.updateById(1L, UserUtil.createFakeDTO()))
                 .thenReturn(MessageResponseDTO.builder()
                         .message("Update user with ID ")
                         .build());
 
-        Assert.assertEquals(this.userController.updateById(UserUtil.createFakeDTO()), MessageResponseDTO.builder()
+        Assert.assertEquals(this.userController.updateById(1L,UserUtil.createFakeDTO()), MessageResponseDTO.builder()
                 .message("Update user with ID ")
                 .build());
     }

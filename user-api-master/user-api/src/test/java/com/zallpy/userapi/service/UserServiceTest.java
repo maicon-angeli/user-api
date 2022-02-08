@@ -99,7 +99,7 @@ public class UserServiceTest {
 
         MessageResponseDTO expectedSuccessMessage = updateExpectedMessageResponse(expectedSavedUser.getId());
 
-        MessageResponseDTO succesMessage = this.userService.updateById(createFakeDTO());
+        MessageResponseDTO succesMessage = this.userService.updateById(1L,createFakeDTO());
 
         assertEquals(expectedSuccessMessage, succesMessage);
 

@@ -47,11 +47,12 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
-    public MessageResponseDTO updateById(  UserDTO userDTO) {
+    public MessageResponseDTO updateById( Long id, UserDTO userDTO) {
+        verifyIfExists(id);
 
         UserEntity usuriousToUpdate = userMapper.toModel(userDTO);
-
-        return createMessageResponse(userRepository.save(usuriousToUpdate).getId(), "Updated user with ID ");
+        UserEntity updateUser =userRepository.save(usuriousToUpdate);
+        return createMessageResponse(updateUser.getId(), "Updated user with ID ");
     }
     public UserEntity verifyIfExists(Long id) throws UserNotFoundException{
         return userRepository.findById(id)

@@ -42,9 +42,9 @@ public class UserController {
 
     }
 
-    @PutMapping
-    public MessageResponseDTO updateById(@RequestBody @Valid UserDTO userDTO){
-        return userService.updateById( userDTO);
+    @PutMapping("/up/{id}")
+    public MessageResponseDTO updateById(@Valid @PathVariable Long id, @RequestBody  UserDTO userDTO){
+        return userService.updateById( id, userDTO);
     }
 
     @DeleteMapping("/{id}")
