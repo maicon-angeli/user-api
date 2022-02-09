@@ -1,8 +1,7 @@
 package com.zallpy.userapi.utils;
 
-import com.zallpy.userapi.dto.request.UserDTO;
+import com.zallpy.userapi.dto.request.UserDTOImpl;
 import com.zallpy.userapi.entity.UserEntity;
-import net.bytebuddy.dynamic.DynamicType;
 
 import java.util.Optional;
 
@@ -15,8 +14,8 @@ public class UserUtil {
     private static final String ACTIVE = "S";
 
 
-    public static UserDTO createFakeDTO() {
-        return UserDTO.builder()
+    public static UserDTOImpl createFakeDTO() {
+        return UserDTOImpl.builder()
                 .firstName(FIRST_NAME)
                 .lastName(LAST_NAME)
                 .age(AGE)

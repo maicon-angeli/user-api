@@ -3,18 +3,22 @@ package com.zallpy.userapi.service;
 
 
 import com.zallpy.userapi.dto.request.UserDTO;
+import com.zallpy.userapi.dto.request.UserDTOImpl;
 import com.zallpy.userapi.dto.response.MessageResponseDTO;
+import com.zallpy.userapi.dto.response.UserSearchAgeDTO;
+import com.zallpy.userapi.dto.response.UserNameDTO;
 import com.zallpy.userapi.entity.UserEntity;
 import exception.UserNotFoundException;
 import com.zallpy.userapi.mapper.UserMapper;
 import com.zallpy.userapi.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Objects;
 
 @Service
 @AllArgsConstructor(onConstructor = @__(@Autowired))
@@ -24,19 +28,20 @@ public class UserService {
     private final UserMapper userMapper = UserMapper.INSTANCE;
 
 
-    public MessageResponseDTO createUser(UserDTO userDTO) {
+    public MessageResponseDTO createUser(UserDTOImpl userDTO) {
+
 
         return createMessageResponse(userRepository.save(userMapper.toModel(userDTO)).getId()
                 , "Created user with ID ");
     }
 
     public List<UserDTO> listALL(){
-        return userRepository.findAll().stream()
-                .map(userMapper::toDTO)
-                .collect(Collectors.toList());
+
+        return userRepository.findAllCustom();
+
     }
 
-    public UserDTO findById(Long id)  {
+    public UserDTOImpl findById(Long id)  {
         UserEntity usurious = userRepository.findById(id)
                 .orElseThrow(()-> new UserNotFoundException(HttpStatus.NOT_FOUND,"Usuário não encontrado"));
         return userMapper.toDTO(usurious);
@@ -47,7 +52,7 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
-    public MessageResponseDTO updateById( Long id, UserDTO userDTO) {
+    public MessageResponseDTO updateById( Long id, UserDTOImpl userDTO) {
         verifyIfExists(id);
 
         UserEntity usuriousToUpdate = userMapper.toModel(userDTO);
@@ -58,6 +63,18 @@ public class UserService {
         return userRepository.findById(id)
                 .orElseThrow(()-> new UserNotFoundException(HttpStatus.NOT_FOUND,"Usuário não encontrado"));
     }
+    public UserNameDTO findUserNameByEmail(String email)  {
+        UserNameDTO usurious = userRepository.findUserNameByEmail(email);
+        if(Objects.isNull(usurious)){
+            throw new UserNotFoundException(HttpStatus.NOT_FOUND,"Usuario não encontrado!");
+        }
+        return usurious;
+    }
+    public List <UserSearchAgeDTO>ListAge(int age){
+
+
+        return userRepository.findUserSearchAge(age);
+    }
 
     private MessageResponseDTO createMessageResponse(long id, String message) {
         return MessageResponseDTO
@@ -65,5 +82,6 @@ public class UserService {
                 .message( message + id)
                 .build();
     }
+
 
 }
