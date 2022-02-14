@@ -1,6 +1,6 @@
 package com.zallpy.userapi.mapper;
 
-import com.zallpy.userapi.dto.request.UserDTOImpl;
+import com.zallpy.userapi.dto.request.UserDTO;
 import com.zallpy.userapi.entity.UserEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
@@ -11,7 +11,7 @@ public interface UserMapper {
     UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
 
 
-    UserEntity toModel(UserDTOImpl userDTOImpl);
-    UserDTOImpl toDTO(UserEntity userEntity);
+    UserEntity toModel(UserDTO userDTOImpl);
+    UserDTO toDTO(UserEntity userEntity);
 
 }

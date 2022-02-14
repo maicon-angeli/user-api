@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/api-usuario
+    url: jdbc:postgresql://localhost:5432/api-person
     username: postgres
     password: banco123
     jpa:

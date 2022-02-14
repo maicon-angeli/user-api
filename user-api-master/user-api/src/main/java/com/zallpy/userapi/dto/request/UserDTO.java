@@ -1,18 +1,46 @@
 package com.zallpy.userapi.dto.request;
 
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.hateoas.RepresentationModel;
 
-public interface UserDTO   {
 
-    Long getId();
+import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
-    String getFirstName();
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class UserDTO extends RepresentationModel<UserDTO> {
 
-    String getLastName();
 
-    String getEmail();
+    private Long id;
+    @NotEmpty
+    @Size (min = 2, max = 100)
+    private String firstName;
+    @NotEmpty
+    @Size (min = 2, max = 100)
+    private String lastName;
 
-    int getAge();
+    private String email;
 
-    String getActive();
+    private int age;
+
+    private String active;
+
+    @Valid
+    @NotEmpty
+    private Long documentsEntityId ;
+
+    @Valid
+    @NotEmpty
+    private Long bloodTypeEntityId ;
+
+
+
 }

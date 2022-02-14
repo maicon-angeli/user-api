@@ -4,3 +4,4 @@ Setup inicial de projeto com o Spring Boot Initialzr
 * Relação de cada uma das operações acima com o padrão arquitetural REST, e a explicação de cada um dos conceitos REST envolvidos durante o desenvolvimento do projeto.
 * Desenvolvimento de testes unitários em dois niveis diferentes,Controladores e Serviços. 
 * Manipulação de execessões utilizando uma classe Controller advice.
+* Utilização de Query otimizadas para buscar no banco.

@@ -1,10 +1,9 @@
 package com.zallpy.userapi.repository;
 
 
-import com.zallpy.userapi.dto.request.UserDTO;
-import com.zallpy.userapi.dto.request.UserDTOImpl;
-import com.zallpy.userapi.dto.response.UserSearchAgeDTO;
+import com.zallpy.userapi.dto.response.UserDTOFull;
 import com.zallpy.userapi.dto.response.UserNameDTO;
+import com.zallpy.userapi.dto.response.UserSearchAgeDTO;
 import com.zallpy.userapi.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -15,7 +14,7 @@ import java.util.List;
 public interface UserRepository extends JpaRepository<UserEntity, Long> {
     @Query(value = "select id,first_name as firstName,last_name as lastName, email , age ,active " +
             "from user_entity order by id" , nativeQuery = true)
-    List <UserDTO> findAllCustom();
+    List<UserDTOFull> findAllCustom();
 
     @Query(value = "select id,CONCAT (first_name,' ',last_name)as fullName from user_entity  " +
             "where email = :email" , nativeQuery = true)
