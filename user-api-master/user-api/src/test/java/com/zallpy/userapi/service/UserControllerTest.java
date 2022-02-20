@@ -32,7 +32,7 @@ public class UserControllerTest {
         standaloneSetup(this.userController);
 
     }
-
+/**
     @Test
     public void deveRetornarSucesso_QuandoBuscarUsuario() {
         Mockito.when(this.userService.findById(1L))
@@ -57,7 +57,7 @@ public class UserControllerTest {
                 .build());
 
     }
-/**
+
     @Test
     public void findAllSuccess() {
         Mockito.when(this.userService.listALL())

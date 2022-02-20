@@ -10,17 +10,19 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "exams_entity")
+@Table(name = "tb_exams")
 public class ExamsEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     private String examName;
 
-    private Float examCost;
+    private double examCost;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "userEntity_id")
     private UserEntity userEntity;
+
 }

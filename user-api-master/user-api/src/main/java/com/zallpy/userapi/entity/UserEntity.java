@@ -1,15 +1,12 @@
 package com.zallpy.userapi.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -18,8 +15,8 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name ="user_entity")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@Table(name ="tb_users")
+
 public class UserEntity {
 
     @Id
@@ -43,14 +40,12 @@ public class UserEntity {
     @JsonIgnore
     private List<ExamsEntity> examsEntities;
 
-    @OneToOne (mappedBy = "userEntityDoc", fetch =FetchType.LAZY)
-    private DocumentsEntity documentsEntity ;
 
-    @ManyToOne(fetch =FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<DocumentsEntity> documentsEntity ;
+
+    @ManyToOne
+    @JoinColumn(name = "blood_type_entity_id")
     private BloodTypeEntity bloodTypeEntity ;
-
-
-
-
 
 }

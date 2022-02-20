@@ -1,5 +1,4 @@
 package com.zallpy.userapi.service;
-import com.zallpy.userapi.dto.request.UserDTO;
 import com.zallpy.userapi.dto.response.MessageResponseDTO;
 import com.zallpy.userapi.entity.UserEntity;
 import com.zallpy.userapi.mapper.UserMapper;
@@ -28,7 +27,7 @@ public class UserServiceTest {
     private UserRepository userRepository;
     @InjectMocks
     private UserService userService;
-
+/**
     @Test
     void testGivenUserDTOThenReturnSavedMessage() {
         UserDTO userDTO = createFakeDTO();
@@ -48,7 +47,7 @@ public class UserServiceTest {
                 .message("Created user with ID " + id)
                 .build();
     }
-/*
+
     @Test
     void testListAllUser() {
 
@@ -57,7 +56,7 @@ public class UserServiceTest {
 
         assertTrue(this.userService.listALL().isEmpty());
     }
-*/
+
     @Test
     void testFindByIdSuccess() {
 
@@ -84,7 +83,7 @@ public class UserServiceTest {
         verify(this.userRepository).deleteById(1L);
 
     }
-    /**
+
     @Test
     void testGivenUserDTOThenReturnUpdateMessage() {
         UserEntity expectedSavedUser = createFakeEntity();
@@ -104,6 +103,7 @@ public class UserServiceTest {
                 .builder()
                 .message("Updated user with ID " + id)
                 .build();
+
 
 }
 

@@ -1,12 +1,10 @@
 package com.zallpy.userapi.utils.Interface;
-
 import com.zallpy.userapi.utils.Mapper.ModelMapperConfiguration;
 import lombok.val;
 import org.modelmapper.ExpressionMap;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
-
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;

@@ -1,9 +1,11 @@
 package com.zallpy.userapi.service.imp;
+
+import com.zallpy.userapi.dto.request.DocumentsDTO;
 import com.zallpy.userapi.dto.request.UserDTO;
 import com.zallpy.userapi.dto.response.MessageResponseDTO;
-import com.zallpy.userapi.dto.response.UserDTOFull;
 import com.zallpy.userapi.dto.response.UserNameDTO;
 import com.zallpy.userapi.dto.response.UserSearchAgeDTO;
+import com.zallpy.userapi.entity.DocumentsEntity;
 import com.zallpy.userapi.entity.UserEntity;
 import com.zallpy.userapi.mapper.UserMapper;
 import com.zallpy.userapi.repository.UserRepository;
@@ -16,26 +18,28 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class UserService implements Mappable {
     private UserRepository userRepository;
 
+
     private final UserMapper userMapper = UserMapper.INSTANCE;
 
 
     public MessageResponseDTO createUser(UserDTO userDTO) {
 
-
         return createMessageResponse(userRepository.save(userMapper.toModel(userDTO)).getId()
                 , "Created user with ID ");
     }
 
-    public List<UserDTOFull> listALL(){
+    public List<UserDTO> listALL(){
+        List<UserEntity> allDocs = userRepository.findAll();
 
+        return map(allDocs, UserDTO.class);
 
-        return userRepository.findAllCustom();
     }
 
     public UserDTO findById(Long id)  {
@@ -49,19 +53,19 @@ public class UserService implements Mappable {
         userRepository.deleteById(id);
     }
 
-    public UserDTO updateById( Long id, UserDTO userDTO) {
-
+    public MessageResponseDTO updateById( Long id, UserDTO userDTO) {
         verifyIfExists(id);
-
         UserEntity usuriousToUpdate = map(userDTO, UserEntity.class) ;
         UserEntity updateUser =userRepository.save(usuriousToUpdate);
-
-        return map(updateUser,UserDTO.class);
+        return createMessageResponse(map(updateUser,UserDTO.class).getId()
+                ,"User Successfully Changed, ID:");
     }
+
     public UserEntity verifyIfExists(Long id) throws UserNotFoundException{
         return userRepository.findById(id)
                 .orElseThrow(()-> new UserNotFoundException(HttpStatus.NOT_FOUND,"Usuário não encontrado"));
     }
+
     public UserNameDTO findUserNameByEmail(String email)  {
         UserNameDTO usurious = userRepository.findUserNameByEmail(email);
         if(Objects.isNull(usurious)){
@@ -69,9 +73,8 @@ public class UserService implements Mappable {
         }
         return usurious;
     }
+
     public List <UserSearchAgeDTO>ListAge(int age){
-
-
         return userRepository.findUserSearchAge(age);
     }
 
@@ -81,6 +84,5 @@ public class UserService implements Mappable {
                 .message( message + id)
                 .build();
     }
-
 
 }

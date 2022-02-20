@@ -1,30 +1,28 @@
 package com.zallpy.userapi.dto.request;
 
-
+import com.zallpy.userapi.entity.BloodTypeEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.hateoas.RepresentationModel;
-
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserDTO extends RepresentationModel<UserDTO> {
-
+public class UserDTO  {
 
     private Long id;
     @NotEmpty
-    @Size (min = 2, max = 100)
+    @Size(min = 2, max = 100)
     private String firstName;
     @NotEmpty
-    @Size (min = 2, max = 100)
+    @Size(min = 2, max = 100)
     private String lastName;
 
     private String email;
@@ -35,12 +33,12 @@ public class UserDTO extends RepresentationModel<UserDTO> {
 
     @Valid
     @NotEmpty
-    private Long documentsEntityId ;
+    private List<DocumentsDTO> documentsEntity;
 
-    @Valid
-    @NotEmpty
-    private Long bloodTypeEntityId ;
+    private BloodTypeEntity bloodTypeEntity;
+
 
 
 
 }
+

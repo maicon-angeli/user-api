@@ -1,18 +1,26 @@
 package com.zallpy.userapi.dto.request;
 
-import com.zallpy.userapi.entity.UserEntity;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
 
-
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class ExamsDTO {
+
 
     private long id;
 
+    @NotEmpty
     private String examName;
+    @NotEmpty
+    private double examCost;
 
-    private Float examCost;
-
-    @Valid
-    private UserEntity userEntity;
+    private Long userId;
 }
+

@@ -1,31 +1,35 @@
 package com.zallpy.userapi.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "documents_entity")
+@Table(name = "tb_docs")
 public class DocumentsEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @CPF
     private String cpf;
 
-    @Column(unique = true)
+    @Column(nullable = false)
     private String rg;
 
-    @Column(unique = true)
+    @Column(nullable = false)
     private String susNumber;
 
-    @OneToOne
-    private UserEntity userEntityDoc;
+
+
+
 }
