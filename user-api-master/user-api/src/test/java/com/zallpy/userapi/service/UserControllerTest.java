@@ -1,6 +1,7 @@
 package com.zallpy.userapi.service;
 
 import com.zallpy.userapi.controller.UserController;
+import com.zallpy.userapi.dto.request.UserDTO;
 import com.zallpy.userapi.dto.response.MessageResponseDTO;
 import com.zallpy.userapi.service.imp.UserService;
 import com.zallpy.userapi.utils.UserUtil;
@@ -70,7 +71,7 @@ public class UserControllerTest {
     @Test
     public void updateByIdTest() {
         Mockito.when(this.userService.updateById(1L, UserUtil.createFakeDTO()))
-                .thenReturn(new UserDTO()
+                .thenReturn(new MessageResponseDTO(1L,UserUtil.createFakeEntity())
                         .message("Update user with ID ")
                         .build());
 
