@@ -1,9 +1,8 @@
 package com.zallpy.userapi.controller;
 
 
-import com.zallpy.userapi.dto.request.BloodTypeDTO;
 import com.zallpy.userapi.dto.request.DocumentsDTO;
-import com.zallpy.userapi.entity.DocumentsEntity;
+import com.zallpy.userapi.dto.response.DocsByEmail;
 import com.zallpy.userapi.service.imp.DocumentsServiceImp;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +22,12 @@ public class DocumentsController {
 
         return documentsServiceImp.getAllDoc();
     }
+
+    @GetMapping("email/{email}")
+    public DocsByEmail docsByEmail(@PathVariable String email) {
+        return documentsServiceImp.docsByEmail(email);
+    }
+
     /** ESTA SENDO CRIADO/ATUALIZADO /EXCLUIDO PELO UserController!
     @PostMapping
     public DocumentsDTO create(@RequestBody DocumentsDTO documentsDTO){

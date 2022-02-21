@@ -3,8 +3,8 @@ package com.zallpy.userapi.controller;
 import com.zallpy.userapi.dto.request.BloodTypeDTO;
 
 
+import com.zallpy.userapi.dto.response.BloodTypeCpf;
 import com.zallpy.userapi.dto.response.MessageResponseDTO;
-import com.zallpy.userapi.entity.BloodTypeEntity;
 import com.zallpy.userapi.service.imp.BloodTypeServiceImp;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +40,12 @@ public class BloodTypeController {
     @DeleteMapping("/{id}")
     public  void deleteById(@PathVariable Long id) {
         bloodTypeServiceImp.delete(id);
+    }
+
+    @GetMapping("cpf/{cpf}")
+    public BloodTypeCpf findBloodTypeCpf(@PathVariable String cpf){
+        return bloodTypeServiceImp.findBloodTypeCpf(cpf);
+
     }
 
 }

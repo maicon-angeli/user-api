@@ -2,13 +2,13 @@ package com.zallpy.userapi.service.imp;
 
 
 import com.zallpy.userapi.dto.request.BloodTypeDTO;
+import com.zallpy.userapi.dto.response.BloodTypeCpf;
 import com.zallpy.userapi.dto.response.MessageResponseDTO;
 import com.zallpy.userapi.entity.BloodTypeEntity;
 import com.zallpy.userapi.repository.BloodTypeRepository;
 import com.zallpy.userapi.utils.Interface.Mappable;
 import exception.UserNotFoundException;
 import lombok.AllArgsConstructor;
-import org.mapstruct.control.MappingControl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -47,6 +47,9 @@ public class BloodTypeServiceImp  implements Mappable {
     public void delete(Long id)  {
         verifyIfExists(id);
         bloodTypeRepository.deleteById(id);
+    }
+    public BloodTypeCpf findBloodTypeCpf(String cpf) {
+        return bloodTypeRepository.findBloodTypeCpf(cpf);
     }
 
     public BloodTypeEntity verifyIfExists(Long id) throws UserNotFoundException {

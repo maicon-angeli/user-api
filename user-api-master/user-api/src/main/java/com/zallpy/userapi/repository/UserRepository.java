@@ -1,6 +1,7 @@
 package com.zallpy.userapi.repository;
 
 
+import com.zallpy.userapi.dto.response.ExamsFindByRg;
 import com.zallpy.userapi.dto.response.UserDTOFull;
 import com.zallpy.userapi.dto.response.UserNameDTO;
 import com.zallpy.userapi.dto.response.UserSearchAgeDTO;
@@ -23,4 +24,6 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
     @Query(value = "select id,CONCAT (first_name,' ',last_name)as compliName from user_entity  " +
             "where age = :age" , nativeQuery = true)
     List <UserSearchAgeDTO> findUserSearchAge(@Param("age") int age);
+
+
 }

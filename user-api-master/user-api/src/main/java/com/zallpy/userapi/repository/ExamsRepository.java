@@ -16,12 +16,12 @@ public interface ExamsRepository extends JpaRepository<ExamsEntity, Long> {
             + "join tb_users on tb_users.id = tb_exams.user_entity_id ", nativeQuery = true)
     List<ExamsRelat> findAllDTO();
 
-    @Query(value ="SELECT te.id , exam_cost , exam_name, first_name, rg  FROM tb_exams te" +
+    @Query(value ="SELECT te.id , exam_cost examCost , exam_name examName, first_name firstName, rg  FROM tb_exams te " +
             "JOIN tb_users tu ON te.user_entity_id = tu.id " +
             "JOIN tb_users_documents_entity tude ON  tu.id = tude.user_entity_id " +
             "JOIN tb_docs td  ON tude.documents_entity_id = td.id " +
-            "WHERE rg = :rg")
-    ExamsFindByRg examsFindByRg(@Param("rg")  String rg);
+            "WHERE rg = :rg" , nativeQuery = true )
+    List<ExamsFindByRg> examsFindByRg(@Param("rg")  String rg);
 
 
 

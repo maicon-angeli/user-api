@@ -1,8 +1,10 @@
 package com.zallpy.userapi.controller;
 
 import com.zallpy.userapi.dto.request.ExamsDTO;
+import com.zallpy.userapi.dto.response.ExamsFindByRg;
 import com.zallpy.userapi.dto.response.ExamsRelat;
 import com.zallpy.userapi.dto.response.MessageResponseDTO;
+import com.zallpy.userapi.dto.response.UserNameDTO;
 import com.zallpy.userapi.service.imp.ExamsServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +41,12 @@ public class ExamsController {
     @PutMapping("/{id}")
     public MessageResponseDTO updateById(@Valid @PathVariable Long id, @RequestBody ExamsDTO examsDTO) {
         return examsServiceImpl.updatebyId(id, examsDTO);
+    }
+
+    @GetMapping("/rg/{rg}")
+    public List<ExamsFindByRg> findExamsByRg(@PathVariable String rg) {
+
+        return examsServiceImpl.findByRg(rg);
     }
 }
 

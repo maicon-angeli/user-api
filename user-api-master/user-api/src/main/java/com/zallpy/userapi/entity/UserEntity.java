@@ -42,6 +42,7 @@ public class UserEntity {
 
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+
     private List<DocumentsEntity> documentsEntity ;
 
     @ManyToOne

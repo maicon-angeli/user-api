@@ -1,6 +1,7 @@
 package com.zallpy.userapi.service.imp;
 
 import com.zallpy.userapi.dto.request.DocumentsDTO;
+import com.zallpy.userapi.dto.response.DocsByEmail;
 import com.zallpy.userapi.entity.DocumentsEntity;
 import com.zallpy.userapi.repository.DocumentsRepository;
 import com.zallpy.userapi.utils.Interface.Mappable;
@@ -20,8 +21,10 @@ public class DocumentsServiceImp implements Mappable {
         List<DocumentsEntity> allDocs = documentsRepository.findAll();
 
         return map(allDocs, DocumentsDTO.class);
+    }
 
-
+    public DocsByEmail docsByEmail(String email) {
+        return documentsRepository.findDocsByEmail(email);
     }
 
     /** ESTÁ SENDO CADASTRATADO E ATUALIZADO PELO USER

@@ -7,6 +7,8 @@ public interface ExamsFindByRg {
 
     String getExamName();
 
-    String getUser();
+    String getFirstName();
+
+    String getRg();
 }
 

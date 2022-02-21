@@ -1,6 +1,7 @@
 package com.zallpy.userapi.service.imp;
 
 import com.zallpy.userapi.dto.request.ExamsDTO;
+import com.zallpy.userapi.dto.response.ExamsFindByRg;
 import com.zallpy.userapi.dto.response.ExamsRelat;
 import com.zallpy.userapi.dto.response.MessageResponseDTO;
 import com.zallpy.userapi.entity.ExamsEntity;
@@ -73,5 +74,10 @@ public class ExamsServiceImpl implements Mappable {
                 .message(message + id)
                 .build();
 
+    }
+
+    public List<ExamsFindByRg> findByRg(String rg) {
+
+        return examsRepository.examsFindByRg(rg);
     }
 }
