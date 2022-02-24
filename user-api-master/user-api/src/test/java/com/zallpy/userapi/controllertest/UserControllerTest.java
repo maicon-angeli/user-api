@@ -1,10 +1,13 @@
-package com.zallpy.userapi.service;
+package com.zallpy.userapi.controllertest;
 
+import com.zallpy.userapi.controller.BloodTypeController;
+import com.zallpy.userapi.controller.DocumentsController;
+import com.zallpy.userapi.controller.ExamsController;
 import com.zallpy.userapi.controller.UserController;
-import com.zallpy.userapi.dto.request.UserDTO;
 import com.zallpy.userapi.dto.response.MessageResponseDTO;
-import com.zallpy.userapi.service.imp.UserService;
+import com.zallpy.userapi.serviceTest.imp.UserService;
 import com.zallpy.userapi.utils.UserUtil;
+import org.assertj.core.util.Lists;
 import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,6 +30,12 @@ public class UserControllerTest {
 
     @MockBean
     private UserService userService;
+    @MockBean
+    private DocumentsController documentsController;
+    @MockBean
+    private ExamsController examsController;
+    @MockBean
+    private BloodTypeController bloodTypeController;
 
     @BeforeEach
     public void setup() {
@@ -48,12 +57,12 @@ public class UserControllerTest {
 
     @Test
     public void successCreateUser() {
-        Mockito.when(this.userController.createUser(any()))
+        Mockito.when(this.userController.create(any()))
                 .thenReturn(MessageResponseDTO.builder()
                         .message("Created user with ID ")
                         .build());
 
-        Assert.assertEquals(this.userController.createUser(any()), MessageResponseDTO.builder()
+        Assert.assertEquals(this.userController.create(any()), MessageResponseDTO.builder()
                 .message("Created user with ID ")
                 .build());
 
@@ -71,14 +80,17 @@ public class UserControllerTest {
     @Test
     public void updateByIdTest() {
         Mockito.when(this.userService.updateById(1L, UserUtil.createFakeDTO()))
-                .thenReturn(new MessageResponseDTO(1L,UserUtil.createFakeEntity())
+                .thenReturn(MessageResponseDTO.builder()
                         .message("Update user with ID ")
                         .build());
 
         Assert.assertEquals(this.userController.updateById(1L,UserUtil.createFakeDTO()), MessageResponseDTO.builder()
                 .message("Update user with ID ")
                 .build());
+
+
     }
+
 
     @Test
     public void deleteByIdTest() {

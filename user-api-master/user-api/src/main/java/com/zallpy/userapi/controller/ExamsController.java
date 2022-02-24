@@ -4,8 +4,7 @@ import com.zallpy.userapi.dto.request.ExamsDTO;
 import com.zallpy.userapi.dto.response.ExamsFindByRg;
 import com.zallpy.userapi.dto.response.ExamsRelat;
 import com.zallpy.userapi.dto.response.MessageResponseDTO;
-import com.zallpy.userapi.dto.response.UserNameDTO;
-import com.zallpy.userapi.service.imp.ExamsServiceImpl;
+import com.zallpy.userapi.serviceTest.imp.ExamsServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -48,5 +47,6 @@ public class ExamsController {
 
         return examsServiceImpl.findByRg(rg);
     }
+
 }
 

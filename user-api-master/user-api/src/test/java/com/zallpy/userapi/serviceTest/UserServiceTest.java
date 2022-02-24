@@ -1,11 +1,14 @@
-package com.zallpy.userapi.service;
+package com.zallpy.userapi.serviceTest;
+
+import com.zallpy.userapi.dto.request.UserDTO;
 import com.zallpy.userapi.dto.response.MessageResponseDTO;
 import com.zallpy.userapi.entity.UserEntity;
 import com.zallpy.userapi.mapper.UserMapper;
 import com.zallpy.userapi.repository.UserRepository;
-import com.zallpy.userapi.service.imp.UserService;
+import com.zallpy.userapi.serviceTest.imp.UserService;
 import com.zallpy.userapi.utils.UserUtil;
 import exception.UserNotFoundException;
+import org.assertj.core.util.Lists;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -27,7 +30,7 @@ public class UserServiceTest {
     private UserRepository userRepository;
     @InjectMocks
     private UserService userService;
-/**
+
     @Test
     void testGivenUserDTOThenReturnSavedMessage() {
         UserDTO userDTO = createFakeDTO();
@@ -72,8 +75,9 @@ public class UserServiceTest {
 
         when(userRepository.findById(anyLong()))
                 .thenReturn(Optional.empty());
-        Assert.assertThrows(UserNotFoundException.class,()->this.userService.findById(1L));
+        Assert.assertThrows(UserNotFoundException.class, () -> this.userService.findById(1L));
     }
+
     @Test
     void testDeleteUser() {
 
@@ -89,22 +93,24 @@ public class UserServiceTest {
         UserEntity expectedSavedUser = createFakeEntity();
         when(userRepository.save(any(UserEntity.class)))
                 .thenReturn(expectedSavedUser);
+        when(userRepository.findById(anyLong()))
+                .thenReturn(Optional.of(expectedSavedUser));
 
         MessageResponseDTO expectedSuccessMessage = updateExpectedMessageResponse(expectedSavedUser.getId());
 
-        MessageResponseDTO succesMessage = this.userService.updateById(1L,createFakeDTO());
+        MessageResponseDTO succesMessage = this.userService.updateById(createFakeEntity().getId(), createFakeDTO());
 
         assertEquals(expectedSuccessMessage, succesMessage);
 
     }
-    */
+
     private MessageResponseDTO updateExpectedMessageResponse(Long id) {
         return MessageResponseDTO
                 .builder()
-                .message("Updated user with ID " + id)
+                .message("Update user with ID " + id)
                 .build();
 
 
-}
+    }
 
 }

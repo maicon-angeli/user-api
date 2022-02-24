@@ -1,11 +1,9 @@
-package com.zallpy.userapi.service.imp;
+package com.zallpy.userapi.serviceTest.imp;
 
-import com.zallpy.userapi.dto.request.DocumentsDTO;
 import com.zallpy.userapi.dto.request.UserDTO;
 import com.zallpy.userapi.dto.response.MessageResponseDTO;
 import com.zallpy.userapi.dto.response.UserNameDTO;
 import com.zallpy.userapi.dto.response.UserSearchAgeDTO;
-import com.zallpy.userapi.entity.DocumentsEntity;
 import com.zallpy.userapi.entity.UserEntity;
 import com.zallpy.userapi.mapper.UserMapper;
 import com.zallpy.userapi.repository.UserRepository;
@@ -18,7 +16,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor(onConstructor = @__(@Autowired))
@@ -58,7 +55,7 @@ public class UserService implements Mappable {
         UserEntity usuriousToUpdate = map(userDTO, UserEntity.class) ;
         UserEntity updateUser =userRepository.save(usuriousToUpdate);
         return createMessageResponse(map(updateUser,UserDTO.class).getId()
-                ,"User Successfully Changed, ID:");
+                ,"Update user with ID ");
     }
 
     public UserEntity verifyIfExists(Long id) throws UserNotFoundException{
