@@ -2,18 +2,20 @@ package com.zallpy.userapi.serviceTest;
 
 import com.zallpy.userapi.dto.request.UserDTO;
 import com.zallpy.userapi.dto.response.MessageResponseDTO;
+import com.zallpy.userapi.dto.response.UserNameDTO;
 import com.zallpy.userapi.entity.UserEntity;
 import com.zallpy.userapi.mapper.UserMapper;
 import com.zallpy.userapi.repository.UserRepository;
 import com.zallpy.userapi.serviceTest.imp.UserService;
 import com.zallpy.userapi.utils.UserUtil;
-import exception.UserNotFoundException;
+import com.zallpy.userapi.exception.UserNotFoundException;
 import org.assertj.core.util.Lists;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
@@ -109,8 +111,30 @@ public class UserServiceTest {
                 .builder()
                 .message("Update user with ID " + id)
                 .build();
-
-
     }
 
+    @Test
+    public void findAllSucess() {
+
+        Mockito.when(this.userRepository.findUserSearchAge(1))
+                .thenReturn(Lists.newArrayList());
+        Assert.assertTrue(this.userService.ListAge(1).isEmpty());
+    }
+
+    @Test
+    void testFindByEmail() {
+        UserNameDTO userNameDTO = UserUtil.createFakeUserEmail();
+        when(userRepository.findUserNameByEmail(""))
+                .thenReturn(userNameDTO);
+
+        assertEquals(this.userService.findUserNameByEmail(""), userNameDTO);
+    }
+
+    @Test
+    void testFindByEmailFail() {
+        UserNameDTO userNameDTO = UserUtil.createFakeUserEmail();
+        when(userRepository.findUserNameByEmail(""))
+                .thenReturn(null);
+        Assert.assertThrows(UserNotFoundException.class, () -> this.userService.findUserNameByEmail(""));
+    }
 }

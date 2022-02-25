@@ -40,6 +40,13 @@ public class ExamsControllerTest {
 
     }
     @Test
+    public void findAllSucess() {
+        Mockito.when(this.examsService.getAll())
+                .thenReturn(Lists.newArrayList());
+        Assert.assertTrue(this.examsController.getAll().isEmpty());
+    }
+
+    @Test
     public void findAllSuccess() {
         Mockito.when(this.examsService.getAll())
                 .thenReturn(Lists.newArrayList());

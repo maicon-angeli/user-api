@@ -1,7 +1,6 @@
 package com.zallpy.userapi.serviceTest;
 
 import com.zallpy.userapi.dto.request.ExamsDTO;
-import com.zallpy.userapi.dto.request.UserDTO;
 import com.zallpy.userapi.dto.response.MessageResponseDTO;
 import com.zallpy.userapi.entity.ExamsEntity;
 import com.zallpy.userapi.entity.UserEntity;
@@ -9,7 +8,7 @@ import com.zallpy.userapi.repository.ExamsRepository;
 import com.zallpy.userapi.repository.UserRepository;
 import com.zallpy.userapi.serviceTest.imp.ExamsServiceImpl;
 import com.zallpy.userapi.utils.ExamsUtil;
-import com.zallpy.userapi.utils.UserUtil;
+import com.zallpy.userapi.exception.UserNotFoundException;
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -22,10 +21,7 @@ import java.util.Optional;
 import static com.zallpy.userapi.utils.ExamsUtil.createFakeEx;
 import static com.zallpy.userapi.utils.ExamsUtil.createFakeExDTO;
 
-import static com.zallpy.userapi.utils.UserUtil.createFakeDTO;
-import static com.zallpy.userapi.utils.UserUtil.createFakeEntity;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.verify;
@@ -46,31 +42,43 @@ public class ExamsServiceTest {
     @Test
     void testListAllUser() {
 
-        when(examsRepository.findAll())
+        when(examsRepository.findAllDTO())
                 .thenReturn(Lists.newArrayList());
 
-        assertTrue(this.examsRepository.findAllDTO().isEmpty());
+        assertTrue(this.examsService.getAll().isEmpty());
     }
 
     @Test
     void testGivenUserDTOThenReturnSavedMessage() {
         ExamsDTO examsDTO = createFakeExDTO();
-        ExamsEntity expectedSavedUser = createFakeEx();
+        UserEntity userEntity = new UserEntity();
+        userEntity.setId(1L);
+        examsDTO.setUserId(1L);
+        ExamsEntity expectedSavedexam = createFakeEx();
         when(examsRepository.save(any(ExamsEntity.class)))
-                .thenReturn(expectedSavedUser);
-        when(examsRepository.findById(anyLong()))
-                .thenReturn(Optional.of(expectedSavedUser));
+                .thenReturn(expectedSavedexam);
+        when(userRepository.findById(1L))
+                .thenReturn(Optional.of(userEntity));
 
-        MessageResponseDTO expectedSuccessMessage = createExpectedMessageResponse(expectedSavedUser.getId());
+        MessageResponseDTO expectedSuccessMessage = createExpectedMessageResponse(expectedSavedexam.getExamName());
 
         MessageResponseDTO succesMessage = this.examsService.create(examsDTO);
         assertEquals(expectedSuccessMessage, succesMessage);
     }
+    @Test
+    void testGivenUserDTOThenReturnFailMessage() {
+        ExamsDTO examsDTO = createFakeExDTO();
+        examsDTO.setUserId(1L);
+          when(userRepository.findById(1L))
+                .thenReturn(Optional.empty());
 
-    private MessageResponseDTO createExpectedMessageResponse(Long id) {
+        assertThrows(UserNotFoundException.class,()->this.examsService.create(examsDTO));
+    }
+
+    private MessageResponseDTO createExpectedMessageResponse( String message) {
         return MessageResponseDTO
                 .builder()
-                .message("Registered exam----" + id)
+                .message("Registered exam----" + message)
                 .build();
     }
 
@@ -85,23 +93,28 @@ public class ExamsServiceTest {
     }
     @Test
     void testGivenUserDTOThenReturnUpdateMessage() {
-        ExamsEntity expectedSavedUser = createFakeEx();
+        ExamsDTO examsDTO = createFakeExDTO();
+        UserEntity userEntity = new UserEntity();
+        userEntity.setId(1L);
+        examsDTO.setUserId(1L);
+        ExamsEntity expectedSavedExam = createFakeEx();
         when(examsRepository.save(any(ExamsEntity.class)))
-                .thenReturn(expectedSavedUser);
+                .thenReturn(expectedSavedExam);
         when(examsRepository.findById(anyLong()))
-                .thenReturn(Optional.of(expectedSavedUser));
+                .thenReturn(Optional.of(expectedSavedExam));
+        when(userRepository.findById(1L))
+                .thenReturn(Optional.of(userEntity));
+        MessageResponseDTO expectedSuccessMessage = updateExpectedMessageResponse(expectedSavedExam.getExamName());
 
-        MessageResponseDTO expectedSuccessMessage = updateExpectedMessageResponse(expectedSavedUser.getId());
-
-        MessageResponseDTO succesMessage = this.examsService.updatebyId(createFakeEx().getId(),createFakeExDTO() );
+        MessageResponseDTO succesMessage = this.examsService.updatebyId(1L,examsDTO);
 
         assertEquals(expectedSuccessMessage, succesMessage);
 
     }
-    private MessageResponseDTO updateExpectedMessageResponse(Long id) {
+    private MessageResponseDTO updateExpectedMessageResponse(String message) {
         return MessageResponseDTO
                 .builder()
-                .message("Exams is Update-" + id)
+                .message("Exam update---" + message)
                 .build();
     }
 
@@ -112,6 +125,21 @@ public class ExamsServiceTest {
                 .thenReturn(Lists.newArrayList());
 
         assertTrue(this.examsService.findByRg("").isEmpty());
+    }
+    @Test
+    void testGivenUserDTOThenReturnUpdateMessageFail() {
+        ExamsDTO examsDTO = createFakeExDTO();
+        UserEntity userEntity = new UserEntity();
+        userEntity.setId(1L);
+        examsDTO.setUserId(1L);
+        ExamsEntity expectedSavedExam = createFakeEx();
+         when(examsRepository.findById(anyLong()))
+                .thenReturn(Optional.of(expectedSavedExam));
+        when(userRepository.findById(1L))
+                .thenReturn(Optional.empty());
+
+        assertThrows(UserNotFoundException.class,()->this.examsService.updatebyId(1L,examsDTO));
+
     }
 
 }

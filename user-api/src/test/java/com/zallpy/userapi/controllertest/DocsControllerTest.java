@@ -4,8 +4,10 @@ import com.zallpy.userapi.controller.BloodTypeController;
 import com.zallpy.userapi.controller.DocumentsController;
 import com.zallpy.userapi.controller.ExamsController;
 import com.zallpy.userapi.controller.UserController;
+import com.zallpy.userapi.dto.response.DocsByEmail;
 import com.zallpy.userapi.serviceTest.imp.DocumentsServiceImp;
 import com.zallpy.userapi.serviceTest.imp.UserService;
+import com.zallpy.userapi.utils.DocsUtil;
 import org.assertj.core.util.Lists;
 import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
@@ -44,14 +46,13 @@ public class DocsControllerTest {
 
         Assert.assertTrue(this.documentsController.getAllDoc().isEmpty());
     }
-    /**
+
     @Test
     public void findBYEMAIL() {
-        Mockito.when(this.documentsController.docsByEmail(String email))
-                .thenReturn(Lists.newArrayList());
+        DocsByEmail docsByEmail = DocsUtil.createFakeDocsByEmail();
+        Mockito.when(this.documentsService.docsByEmail(""))
+                .thenReturn(docsByEmail);
 
-        Assert.assertTrue(this.documentsController.getAllDoc().isEmpty());
+        Assert.assertEquals(this.documentsController.docsByEmail(""),docsByEmail);
     }
-**/
-
 }

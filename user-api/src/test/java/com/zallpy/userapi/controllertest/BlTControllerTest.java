@@ -4,6 +4,7 @@ import com.zallpy.userapi.controller.BloodTypeController;
 import com.zallpy.userapi.controller.DocumentsController;
 import com.zallpy.userapi.controller.ExamsController;
 import com.zallpy.userapi.controller.UserController;
+import com.zallpy.userapi.dto.response.BloodTypeCpf;
 import com.zallpy.userapi.dto.response.MessageResponseDTO;
 import com.zallpy.userapi.serviceTest.imp.BloodTypeServiceImp;
 import com.zallpy.userapi.utils.BlTypeUtil;
@@ -61,12 +62,12 @@ public class BlTControllerTest {
 
     @Test
     public void updateByIdTest() {
-        Mockito.when(this.bloodTypeController.updateById(1L, BlTypeUtil.createFakeBlTTDO()))
+        Mockito.when(this.bloodTypeController.updateById(1L, BlTypeUtil.createFakeBlTDTO()))
                 .thenReturn(MessageResponseDTO.builder()
                         .message("Update user with ID ")
                         .build());
 
-        Assert.assertEquals(this.bloodTypeController.updateById(1L,BlTypeUtil.createFakeBlTTDO()), MessageResponseDTO.builder()
+        Assert.assertEquals(this.bloodTypeController.updateById(1L,BlTypeUtil.createFakeBlTDTO()), MessageResponseDTO.builder()
                 .message("Update user with ID ")
                 .build());
     }
@@ -76,20 +77,17 @@ public class BlTControllerTest {
         this.bloodTypeController.deleteById(1L);
         verify(bloodTypeServiceImp).delete(1L);
     }
-    /**
+
     @Test
     public void findByCpf(){
-        Mockito.when(this.bloodTypeController.findBloodTypeCpf("84085851004"))
-                .thenReturn(BlTypeUtil.createFakeBlTOptional());
-            when()
-                    .get("/bloodtype/cpf/{cpf}","84085851004")
-                    .then()
-                    .statusCode(HttpStatus.OK.value());
-            Assert.assertEquals(this.bloodTypeController.findBloodTypeCpf("84085851004"),(BloodTypeCpf) UserUtil.createFakeDTO());
+        BloodTypeCpf bloodTypeCpf= BlTypeUtil.createFakeBlTCPF() ;
+        Mockito.when(this.bloodTypeServiceImp.findBloodTypeCpf(""))
+                .thenReturn(bloodTypeCpf);
 
-
+            Assert.assertEquals(this.bloodTypeController.findBloodTypeCpf("")
+                    ,bloodTypeCpf);
     }
-    **/
+
 }
 
 

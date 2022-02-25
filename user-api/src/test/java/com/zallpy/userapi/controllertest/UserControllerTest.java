@@ -4,8 +4,11 @@ import com.zallpy.userapi.controller.BloodTypeController;
 import com.zallpy.userapi.controller.DocumentsController;
 import com.zallpy.userapi.controller.ExamsController;
 import com.zallpy.userapi.controller.UserController;
+import com.zallpy.userapi.dto.response.BloodTypeCpf;
 import com.zallpy.userapi.dto.response.MessageResponseDTO;
+import com.zallpy.userapi.dto.response.UserNameDTO;
 import com.zallpy.userapi.serviceTest.imp.UserService;
+import com.zallpy.userapi.utils.BlTypeUtil;
 import com.zallpy.userapi.utils.UserUtil;
 import org.assertj.core.util.Lists;
 import org.junit.Assert;
@@ -84,20 +87,37 @@ public class UserControllerTest {
                         .message("Update user with ID ")
                         .build());
 
-        Assert.assertEquals(this.userController.updateById(1L,UserUtil.createFakeDTO()), MessageResponseDTO.builder()
+        Assert.assertEquals(this.userController.updateById(1L, UserUtil.createFakeDTO()), MessageResponseDTO.builder()
                 .message("Update user with ID ")
                 .build());
 
 
     }
 
-
     @Test
     public void deleteByIdTest() {
         this.userController.deleteById(1L);
         verify(userService).delete(1L);
-
     }
+    @Test
+    public void findAllbyAge() {
+        Mockito.when(this.userService.ListAge(1))
+                .thenReturn(Lists.newArrayList());
+
+        Assert.assertTrue(this.userController.findNameByAge(1).isEmpty());
+    }
+
+    @Test
+    public void findByEmail(){
+        UserNameDTO userNameDTO = UserUtil.createFakeUserEmail();
+        Mockito.when(this.userService.findUserNameByEmail(""))
+                .thenReturn(userNameDTO);
+
+        Assert.assertEquals(this.userController.findNameByEmail("")
+                ,userNameDTO);
+    }
+
+
 
 }
 

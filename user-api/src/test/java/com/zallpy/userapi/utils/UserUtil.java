@@ -1,6 +1,8 @@
 package com.zallpy.userapi.utils;
 
 import com.zallpy.userapi.dto.request.UserDTO;
+import com.zallpy.userapi.dto.response.UserNameDTO;
+import com.zallpy.userapi.dto.response.UserSearchAgeDTO;
 import com.zallpy.userapi.entity.UserEntity;
 
 import java.util.Optional;
@@ -44,6 +46,33 @@ public class UserUtil {
                 .active(ACTIVE)
                 .email(EMAIL)
                 .build());
+    }
+    public static UserSearchAgeDTO createFakeEntityage(){
+        return new UserSearchAgeDTO() {
+            @Override
+            public Long getId() {
+                return null;
+            }
+
+            @Override
+            public String getCompliName() {
+                return null;
+            }
+        };
+
+    }
+    public static UserNameDTO createFakeUserEmail() {
+        return new UserNameDTO() {
+            @Override
+            public Long getId() {
+                return null;
+            }
+
+            @Override
+            public String getFullName() {
+                return null;
+            }
+        };
     }
 }
 

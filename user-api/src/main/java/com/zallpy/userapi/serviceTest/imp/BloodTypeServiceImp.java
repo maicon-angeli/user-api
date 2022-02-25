@@ -7,7 +7,7 @@ import com.zallpy.userapi.dto.response.MessageResponseDTO;
 import com.zallpy.userapi.entity.BloodTypeEntity;
 import com.zallpy.userapi.repository.BloodTypeRepository;
 import com.zallpy.userapi.utils.Interface.Mappable;
-import exception.UserNotFoundException;
+import com.zallpy.userapi.exception.UserNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

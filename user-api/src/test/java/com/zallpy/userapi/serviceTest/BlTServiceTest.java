@@ -4,12 +4,9 @@ import com.zallpy.userapi.dto.request.BloodTypeDTO;
 import com.zallpy.userapi.dto.response.BloodTypeCpf;
 import com.zallpy.userapi.dto.response.MessageResponseDTO;
 import com.zallpy.userapi.entity.BloodTypeEntity;
-import com.zallpy.userapi.mapper.UserMapper;
 import com.zallpy.userapi.repository.BloodTypeRepository;
 import com.zallpy.userapi.serviceTest.imp.BloodTypeServiceImp;
 import com.zallpy.userapi.utils.BlTypeUtil;
-import com.zallpy.userapi.utils.UserUtil;
-import exception.UserNotFoundException;
 import org.assertj.core.util.Lists;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
@@ -36,7 +33,7 @@ public class BlTServiceTest {
 
     @Test
     void testGivenBloodTypeDTOTheReturnSavedMessage() {
-        BloodTypeDTO bloodTypeDTO = createFakeBlTTDO();
+        BloodTypeDTO bloodTypeDTO = createFakeBlTDTO();
         BloodTypeEntity expectedSavedUser = createFakeBlTEntity();
         when(bloodTypeRepository.save(any(BloodTypeEntity.class)))
                 .thenReturn(expectedSavedUser);
@@ -79,7 +76,7 @@ public class BlTServiceTest {
 
         MessageResponseDTO expectedSuccessMessage = updateExpectedMessageResponse(expectedSavedUser.getId());
 
-        MessageResponseDTO succesMessage = this.bloodTypeServiceImp.updatebyId(createFakeBlTEntity().getId(),createFakeBlTTDO());
+        MessageResponseDTO succesMessage = this.bloodTypeServiceImp.updatebyId(createFakeBlTEntity().getId(),createFakeBlTDTO());
 
         assertEquals(expectedSuccessMessage, succesMessage);
 
@@ -93,23 +90,14 @@ public class BlTServiceTest {
         verify(this.bloodTypeRepository).deleteById(1L);
     }
 
-    @Test
-    void testFindByCpfFail() {
 
-        when(bloodTypeRepository.findBloodTypeCpf(""))
-            .thenReturn(bloodTypeServiceImp.findBloodTypeCpf(""));
-
-    assertEquals(this.bloodTypeRepository.findBloodTypeCpf("")
-
-            ,UserMapper.INSTANCE.toDTO(UserUtil.createFakeEntityOptional()
-                    .get()));
-    }
 
      @Test
      void testFindByCpfSucess() {
+        BloodTypeCpf bloodTypeCpf = BlTypeUtil.createFakeBlTCPF();
      when(bloodTypeRepository.findBloodTypeCpf(""))
-     .thenReturn(bloodTypeServiceImp.findBloodTypeCpf(""));
-        Assert.assertThrows(UserNotFoundException.class,()->this.bloodTypeServiceImp.findBloodTypeCpf(""));
+     .thenReturn(bloodTypeCpf);
+        Assert.assertEquals(bloodTypeServiceImp.findBloodTypeCpf(""),bloodTypeCpf);
     }
 
 

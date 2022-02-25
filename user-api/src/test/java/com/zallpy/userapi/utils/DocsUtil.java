@@ -1,6 +1,7 @@
 package com.zallpy.userapi.utils;
 
 import com.zallpy.userapi.dto.request.DocumentsDTO;
+import com.zallpy.userapi.dto.response.DocsByEmail;
 import com.zallpy.userapi.entity.DocumentsEntity;
 
 import javax.validation.constraints.NotEmpty;
@@ -37,4 +38,34 @@ public class DocsUtil {
                 .build());
     }
 
+    public static DocsByEmail createFakeDocsByEmail(){
+        return new DocsByEmail() {
+            @Override
+            public Long getId() {
+                return null;
+            }
+
+            @Override
+            public String getFullName() {
+                return null;
+            }
+
+            @Override
+            public String getCpf() {
+                return null;
+            }
+
+            @Override
+            public String getRg() {
+                return null;
+            }
+
+            @Override
+            public String getSusNumber() {
+                return null;
+            }
+        } ;
+
+
+}
 }

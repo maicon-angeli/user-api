@@ -8,7 +8,7 @@ import com.zallpy.userapi.entity.UserEntity;
 import com.zallpy.userapi.mapper.UserMapper;
 import com.zallpy.userapi.repository.UserRepository;
 import com.zallpy.userapi.utils.Interface.Mappable;
-import exception.UserNotFoundException;
+import com.zallpy.userapi.exception.UserNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

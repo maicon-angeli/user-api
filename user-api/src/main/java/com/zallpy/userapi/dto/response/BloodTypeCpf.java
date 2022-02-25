@@ -1,5 +1,6 @@
 package com.zallpy.userapi.dto.response;
 
+
 public interface BloodTypeCpf {
 
     String getFullName();

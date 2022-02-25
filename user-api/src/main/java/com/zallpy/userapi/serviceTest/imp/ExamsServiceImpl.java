@@ -9,14 +9,14 @@ import com.zallpy.userapi.entity.UserEntity;
 import com.zallpy.userapi.repository.ExamsRepository;
 import com.zallpy.userapi.repository.UserRepository;
 import com.zallpy.userapi.utils.Interface.Mappable;
-import exception.UserNotFoundException;
+import com.zallpy.userapi.exception.UserNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Objects;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor(onConstructor = @__(@Autowired))
@@ -26,14 +26,15 @@ public class ExamsServiceImpl implements Mappable {
     UserRepository userRepository;
 
     public List<ExamsRelat> getAll() {
+
         return examsRepository.findAllDTO();
     }
 
     public MessageResponseDTO create(ExamsDTO examsDTO) {
         ExamsEntity createExamsEntity = map(examsDTO, ExamsEntity.class);
-        UserEntity userEntity = userRepository.findById(examsDTO.getUserId()).get();
-        if (Objects.nonNull(userEntity)) {
-            createExamsEntity.setUserEntity(userEntity);
+        Optional <UserEntity> userEntity = userRepository.findById(examsDTO.getUserId());
+        if (userEntity.isPresent()) {
+            createExamsEntity.setUserEntity(userEntity.get());
             ExamsEntity createform = examsRepository.save(createExamsEntity);
             return createMessageResponse(map(createform, ExamsDTO.class).getExamName()
                     , "Registered exam----");
@@ -50,9 +51,9 @@ public class ExamsServiceImpl implements Mappable {
     public MessageResponseDTO updatebyId(Long id, ExamsDTO examsDTO) {
         verifyIfExists(id);
         ExamsEntity createExamsEntity = map(examsDTO, ExamsEntity.class);
-        UserEntity userEntity = userRepository.findById(examsDTO.getUserId()).get();
-        if (Objects.nonNull(userEntity)) {
-            createExamsEntity.setUserEntity(userEntity);
+        Optional <UserEntity> userEntity = userRepository.findById(examsDTO.getUserId());
+        if (userEntity.isPresent()) {
+            createExamsEntity.setUserEntity(userEntity.get());
             ExamsEntity createform = examsRepository.save(createExamsEntity);
             return createMessageResponse(map(createform, ExamsDTO.class).getExamName()
                     , "Exam update---");

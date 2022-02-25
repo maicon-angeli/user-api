@@ -1,6 +1,7 @@
 package com.zallpy.userapi.utils;
 
 import com.zallpy.userapi.dto.request.BloodTypeDTO;
+import com.zallpy.userapi.dto.response.BloodTypeCpf;
 import com.zallpy.userapi.entity.BloodTypeEntity;
 
 import java.util.Optional;
@@ -18,7 +19,7 @@ public class BlTypeUtil {
                 .build();
     }
 
-    public static BloodTypeDTO createFakeBlTTDO() {
+    public static BloodTypeDTO createFakeBlTDTO() {
         return BloodTypeDTO.builder()
                 .id(BLOOD_TYPE_ENTITY_ID)
                 .bloodType(BLOODTYPE)
@@ -29,5 +30,23 @@ public class BlTypeUtil {
                 .id(BLOOD_TYPE_ENTITY_ID)
                 .bloodType(BLOODTYPE)
                 .build());
+    }
+    public static BloodTypeCpf createFakeBlTCPF() {
+        return new BloodTypeCpf() {
+            @Override
+            public String getFullName() {
+                return null;
+            }
+
+            @Override
+            public String getBloodType() {
+                return null;
+            }
+
+            @Override
+            public String getCpf() {
+                return null;
+            }
+        };
     }
 }
