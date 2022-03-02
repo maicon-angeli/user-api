@@ -1,8 +1,9 @@
 package com.zallpy.userapi.serviceTest.imp;
 
-import WebSecurity.JWTCreator;
-import WebSecurity.JWTObject;
-import WebSecurity.SecurityConfig;
+
+import com.zallpy.userapi.WebSecurity.JWTCreator;
+import com.zallpy.userapi.WebSecurity.JWTObject;
+import com.zallpy.userapi.WebSecurity.SecurityConfig;
 import com.zallpy.userapi.dto.request.Login;
 import com.zallpy.userapi.dto.response.Session;
 import com.zallpy.userapi.entity.UserLog;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
 
 import java.util.Date;
 
@@ -25,7 +27,7 @@ public class LoginService {
 
     private UserLogRepository repository;
 
-    public Session logar( Login login){
+    public Session logar(Login login){
         UserLog user = repository.findByUsername(login.getUsername());
         if(user!=null) {
             boolean passwordOk =  encoder.matches(login.getPassword(), user.getPassword());

@@ -1,4 +1,4 @@
-package WebSecurity;
+package com.zallpy.userapi.WebSecurity;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;

@@ -1,4 +1,4 @@
-package WebSecurity;
+package com.zallpy.userapi.WebSecurity;
 
 import lombok.Data;
 

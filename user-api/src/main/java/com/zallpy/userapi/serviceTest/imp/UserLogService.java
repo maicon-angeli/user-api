@@ -14,6 +14,7 @@ public class UserLogService {
     private UserLogRepository repository;
 
     private PasswordEncoder encoder;
+
     public void createUser(UserLog user){
         String pass = user.getPassword();
         //criptografando antes de salvar no banco
