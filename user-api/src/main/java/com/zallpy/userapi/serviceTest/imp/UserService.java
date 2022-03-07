@@ -10,12 +10,21 @@ import com.zallpy.userapi.repository.UserRepository;
 import com.zallpy.userapi.utils.Interface.Mappable;
 import com.zallpy.userapi.exception.UserNotFoundException;
 import lombok.AllArgsConstructor;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.util.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
+
+import static java.nio.file.Files.write;
 
 @Service
 @AllArgsConstructor(onConstructor = @__(@Autowired))
@@ -81,5 +90,6 @@ public class UserService implements Mappable {
                 .message( message + id)
                 .build();
     }
+
 
 }

@@ -4,15 +4,23 @@ import com.zallpy.userapi.dto.request.UserDTO;
 import com.zallpy.userapi.dto.response.MessageResponseDTO;
 import com.zallpy.userapi.dto.response.UserNameDTO;
 import com.zallpy.userapi.dto.response.UserSearchAgeDTO;
+import com.zallpy.userapi.model.GenerateCSVReport;
+import com.zallpy.userapi.model.GenerateExcelReport;
 import com.zallpy.userapi.serviceTest.imp.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.util.List;
-
 
 
 @RestController
@@ -66,5 +74,25 @@ public class UserController {
         userService.delete(id);
     }
 
+    @GetMapping(value = "/alluserreportExcel")
+    public ResponseEntity<InputStreamResource> excelCustomersReport() throws IOException {
+        List<UserDTO> users = (List<UserDTO>) userService.listALL();
+        ByteArrayInputStream in = GenerateExcelReport.usersToExcel(users);
+        // return IO ByteArray(in);
+        HttpHeaders headers = new HttpHeaders();
+        // set filename in header
+        headers.add("Content-Disposition", "attachment; filename=users.xlsx");
+        return ResponseEntity.ok().headers(headers).contentType(MediaType.parseMediaType(
+                "application/xlsx")).body(new InputStreamResource(in));
+    }
+    @GetMapping(value = "/alluserreportCSV")
+    public void csvUsers(HttpServletResponse response) throws IOException {
+        List<UserDTO> users = (List<UserDTO>) userService.listALL();
+        GenerateCSVReport.writeUsers(response.getWriter(), users);
+        response.setHeader("Content-Disposition", "attachment; filename=AllUsersCSVReport.csv");
+    }
+
+
 }
+
 

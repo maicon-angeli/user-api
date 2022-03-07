@@ -5,3 +5,5 @@ Setup inicial de projeto com o Spring Boot Initialzr
 * Desenvolvimento de testes unitários em dois niveis diferentes,Controladores e Serviços. 
 * Manipulação de execessões utilizando uma classe Controller advice.
 * Utilização de Query otimizadas para buscar no banco.
+* Extensão spring security e Json Web Token.
+ 
