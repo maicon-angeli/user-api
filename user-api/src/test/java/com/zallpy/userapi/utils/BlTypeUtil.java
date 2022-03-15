@@ -1,6 +1,6 @@
 package com.zallpy.userapi.utils;
 
-import com.zallpy.userapi.dto.request.BloodTypeDTO;
+import com.zallpy.userapi.dto.response.BloodTypeDTO;
 import com.zallpy.userapi.dto.response.BloodTypeCpf;
 import com.zallpy.userapi.entity.BloodTypeEntity;
 

@@ -1,4 +1,5 @@
-package com.zallpy.userapi.WebSecurity;
+package com.zallpy.userapi.webSecurity;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,11 +26,11 @@ public class JWTFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
         //obtem o token da request com AUTHORIZATION
-        String token =  request.getHeader(JWTCreator.HEADER_AUTHORIZATION);
+        String token = request.getHeader(JWTCreator.HEADER_AUTHORIZATION);
         //esta implementação só esta validando a integridade do token
         try {
-            if(token!=null && !token.isEmpty()) {
-                JWTObject tokenObject = JWTCreator.create(token,SecurityConfig.PREFIX, SecurityConfig.KEY);
+            if (token != null && !token.isEmpty()) {
+                JWTObject tokenObject = JWTCreator.create(token, SecurityConfig.PREFIX, SecurityConfig.KEY);
 
                 List<SimpleGrantedAuthority> authorities = authorities(tokenObject.getRoles());
 
@@ -41,17 +42,18 @@ public class JWTFilter extends OncePerRequestFilter {
 
                 SecurityContextHolder.getContext().setAuthentication(userToken);
 
-            }else {
+            } else {
                 SecurityContextHolder.clearContext();
             }
             filterChain.doFilter(request, response);
-        }catch (ExpiredJwtException | UnsupportedJwtException | MalformedJwtException | SignatureException e) {
+        } catch (ExpiredJwtException | UnsupportedJwtException | MalformedJwtException | SignatureException e) {
             e.printStackTrace();
             response.setStatus(HttpStatus.FORBIDDEN.value());
             return;
         }
     }
-    private List<SimpleGrantedAuthority> authorities(List<String> roles){
+
+    private List<SimpleGrantedAuthority> authorities(List<String> roles) {
         return roles.stream().map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
     }

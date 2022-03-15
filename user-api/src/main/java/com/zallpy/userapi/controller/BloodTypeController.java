@@ -1,11 +1,11 @@
 package com.zallpy.userapi.controller;
 
-import com.zallpy.userapi.dto.request.BloodTypeDTO;
+import com.zallpy.userapi.dto.response.BloodTypeDTO;
 
 
 import com.zallpy.userapi.dto.response.BloodTypeCpf;
 import com.zallpy.userapi.dto.response.MessageResponseDTO;
-import com.zallpy.userapi.serviceTest.imp.BloodTypeServiceImp;
+import com.zallpy.userapi.service.imp.BloodTypeServiceImp;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

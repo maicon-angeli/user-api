@@ -1,8 +1,9 @@
 package com.zallpy.userapi.repository;
 
+import com.zallpy.userapi.dto.response.ExamsCSV;
 import com.zallpy.userapi.dto.response.ExamsFindByRg;
+import com.zallpy.userapi.dto.response.ExamsGetAll;
 import com.zallpy.userapi.dto.response.ExamsRelat;
-import com.zallpy.userapi.dto.response.UserNameDTO;
 import com.zallpy.userapi.entity.ExamsEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -22,7 +23,13 @@ public interface ExamsRepository extends JpaRepository<ExamsEntity, Long> {
             "JOIN tb_docs td  ON tude.documents_entity_id = td.id " +
             "WHERE rg = :rg" , nativeQuery = true )
     List<ExamsFindByRg> examsFindByRg(@Param("rg")  String rg);
-
+    @Query(value = "SELECT te.id , te.exam_cost examCost , te.exam_name examName, " +
+            " concat(first_name ,'',last_name )fullName , td.rg, "+
+            " td.cpf, tu.email ,td.sus_number susNumber,tu.age ,tu.active  FROM tb_exams te " +
+            "JOIN tb_users tu ON te.user_entity_id = tu.id " +
+            "JOIN tb_users_documents_entity tude ON  tu.id = tude.user_entity_id " +
+            "JOIN tb_docs td  ON tude.documents_entity_id = td.id ",nativeQuery = true)
+    List<ExamsGetAll> GetAll();
 
 
 

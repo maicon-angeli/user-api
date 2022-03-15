@@ -5,8 +5,8 @@ import com.zallpy.userapi.controller.DocumentsController;
 import com.zallpy.userapi.controller.ExamsController;
 import com.zallpy.userapi.controller.UserController;
 import com.zallpy.userapi.dto.response.DocsByEmail;
-import com.zallpy.userapi.serviceTest.imp.DocumentsServiceImp;
-import com.zallpy.userapi.serviceTest.imp.UserService;
+
+import com.zallpy.userapi.service.imp.DocumentsServiceImp;
 import com.zallpy.userapi.utils.DocsUtil;
 import org.assertj.core.util.Lists;
 import org.junit.Assert;

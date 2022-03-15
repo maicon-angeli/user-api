@@ -6,9 +6,9 @@ import com.zallpy.userapi.dto.response.UserNameDTO;
 import com.zallpy.userapi.entity.UserEntity;
 import com.zallpy.userapi.mapper.UserMapper;
 import com.zallpy.userapi.repository.UserRepository;
-import com.zallpy.userapi.serviceTest.imp.UserService;
+import com.zallpy.userapi.service.imp.UserService;
 import com.zallpy.userapi.utils.UserUtil;
-import com.zallpy.userapi.exception.UserNotFoundException;
+import com.zallpy.userapi.exception.ApiException;
 import org.assertj.core.util.Lists;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
@@ -77,7 +77,7 @@ public class UserServiceTest {
 
         when(userRepository.findById(anyLong()))
                 .thenReturn(Optional.empty());
-        Assert.assertThrows(UserNotFoundException.class, () -> this.userService.findById(1L));
+        Assert.assertThrows(ApiException.class, () -> this.userService.findById(1L));
     }
 
     @Test
@@ -135,6 +135,6 @@ public class UserServiceTest {
         UserNameDTO userNameDTO = UserUtil.createFakeUserEmail();
         when(userRepository.findUserNameByEmail(""))
                 .thenReturn(null);
-        Assert.assertThrows(UserNotFoundException.class, () -> this.userService.findUserNameByEmail(""));
+        Assert.assertThrows(ApiException.class, () -> this.userService.findUserNameByEmail(""));
     }
 }

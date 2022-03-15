@@ -10,7 +10,10 @@ public interface UserLogRepository extends JpaRepository<UserLog, Long> {
     @Query("SELECT e FROM UserLog e JOIN FETCH e.roles WHERE e.username= (:username)")
     public UserLog findByUsername(@Param("username") String username);
 
+
     boolean existsByUsername(String username);
+
+
 
 
 }

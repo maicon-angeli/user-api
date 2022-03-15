@@ -3,7 +3,7 @@ package com.zallpy.userapi.controller;
 
 import com.zallpy.userapi.dto.request.DocumentsDTO;
 import com.zallpy.userapi.dto.response.DocsByEmail;
-import com.zallpy.userapi.serviceTest.imp.DocumentsServiceImp;
+import com.zallpy.userapi.service.imp.DocumentsServiceImp;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

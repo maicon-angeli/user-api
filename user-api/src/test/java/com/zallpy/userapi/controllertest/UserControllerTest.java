@@ -1,14 +1,13 @@
-package com.zallpy.userapi.controllertest;
+package com.zallpy.userapi.controllerTest;
 
 import com.zallpy.userapi.controller.BloodTypeController;
 import com.zallpy.userapi.controller.DocumentsController;
 import com.zallpy.userapi.controller.ExamsController;
 import com.zallpy.userapi.controller.UserController;
-import com.zallpy.userapi.dto.response.BloodTypeCpf;
 import com.zallpy.userapi.dto.response.MessageResponseDTO;
 import com.zallpy.userapi.dto.response.UserNameDTO;
-import com.zallpy.userapi.serviceTest.imp.UserService;
-import com.zallpy.userapi.utils.BlTypeUtil;
+import com.zallpy.userapi.service.imp.UserService;
+
 import com.zallpy.userapi.utils.UserUtil;
 import org.assertj.core.util.Lists;
 import org.junit.Assert;

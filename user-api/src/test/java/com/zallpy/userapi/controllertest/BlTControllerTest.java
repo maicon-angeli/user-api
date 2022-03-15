@@ -1,12 +1,14 @@
-package com.zallpy.userapi.controllertest;
+package com.zallpy.userapi.controllerTest;
 
 import com.zallpy.userapi.controller.BloodTypeController;
 import com.zallpy.userapi.controller.DocumentsController;
 import com.zallpy.userapi.controller.ExamsController;
+import com.zallpy.userapi.controller.LoginController;
 import com.zallpy.userapi.controller.UserController;
+import com.zallpy.userapi.controller.UserLogController;
 import com.zallpy.userapi.dto.response.BloodTypeCpf;
 import com.zallpy.userapi.dto.response.MessageResponseDTO;
-import com.zallpy.userapi.serviceTest.imp.BloodTypeServiceImp;
+import com.zallpy.userapi.service.imp.BloodTypeServiceImp;
 import com.zallpy.userapi.utils.BlTypeUtil;
 import org.assertj.core.util.Lists;
 import org.junit.Assert;
@@ -34,6 +36,10 @@ public class BlTControllerTest {
     private ExamsController examsController;
     @MockBean
     private UserController userController;
+    @MockBean
+    private UserLogController userLog;
+    @MockBean
+    private LoginController loginController;
 
 
     @Before

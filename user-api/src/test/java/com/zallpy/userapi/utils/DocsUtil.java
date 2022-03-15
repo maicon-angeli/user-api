@@ -4,7 +4,6 @@ import com.zallpy.userapi.dto.request.DocumentsDTO;
 import com.zallpy.userapi.dto.response.DocsByEmail;
 import com.zallpy.userapi.entity.DocumentsEntity;
 
-import javax.validation.constraints.NotEmpty;
 import java.util.Optional;
 
 public class DocsUtil {

@@ -3,7 +3,6 @@ package com.zallpy.userapi.utils;
 import com.zallpy.userapi.dto.request.ExamsDTO;
 import com.zallpy.userapi.dto.response.ExamsRelat;
 import com.zallpy.userapi.entity.ExamsEntity;
-import com.zallpy.userapi.entity.UserEntity;
 
 import java.util.Optional;
 

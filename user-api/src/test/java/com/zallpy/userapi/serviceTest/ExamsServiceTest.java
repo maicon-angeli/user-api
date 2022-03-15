@@ -6,9 +6,9 @@ import com.zallpy.userapi.entity.ExamsEntity;
 import com.zallpy.userapi.entity.UserEntity;
 import com.zallpy.userapi.repository.ExamsRepository;
 import com.zallpy.userapi.repository.UserRepository;
-import com.zallpy.userapi.serviceTest.imp.ExamsServiceImpl;
+import com.zallpy.userapi.service.imp.ExamsServiceImpl;
 import com.zallpy.userapi.utils.ExamsUtil;
-import com.zallpy.userapi.exception.UserNotFoundException;
+import com.zallpy.userapi.exception.ApiException;
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -72,7 +72,7 @@ public class ExamsServiceTest {
           when(userRepository.findById(1L))
                 .thenReturn(Optional.empty());
 
-        assertThrows(UserNotFoundException.class,()->this.examsService.create(examsDTO));
+        assertThrows(ApiException.class,()->this.examsService.create(examsDTO));
     }
 
     private MessageResponseDTO createExpectedMessageResponse( String message) {
@@ -138,7 +138,7 @@ public class ExamsServiceTest {
         when(userRepository.findById(1L))
                 .thenReturn(Optional.empty());
 
-        assertThrows(UserNotFoundException.class,()->this.examsService.updatebyId(1L,examsDTO));
+        assertThrows(ApiException.class,()->this.examsService.updatebyId(1L,examsDTO));
 
     }
 

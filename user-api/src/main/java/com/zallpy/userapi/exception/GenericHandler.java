@@ -44,8 +44,8 @@ import java.util.Map;
                     .build();
         }
 
-        @ExceptionHandler(UserNotFoundException.class)
-        public ResponseEntity<ExceptionResponse> handlerApiExceptionException(UserNotFoundException exception) {
+        @ExceptionHandler(ApiException.class)
+        public ResponseEntity<ExceptionResponse> handlerApiExceptionException(ApiException exception) {
             ExceptionResponse exceptionResponse = ExceptionResponse.builder()
                     .name("userNotFoundException")
                     .cause(exception.getMessage())
@@ -54,5 +54,7 @@ import java.util.Map;
                     .build();
             return new ResponseEntity<>(exceptionResponse, exception.getStatus());
         }
+
+
     }
 

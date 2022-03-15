@@ -4,9 +4,9 @@ import com.zallpy.userapi.dto.request.UserDTO;
 import com.zallpy.userapi.dto.response.MessageResponseDTO;
 import com.zallpy.userapi.dto.response.UserNameDTO;
 import com.zallpy.userapi.dto.response.UserSearchAgeDTO;
-import com.zallpy.userapi.model.GenerateCSVReport;
-import com.zallpy.userapi.model.GenerateExcelReport;
-import com.zallpy.userapi.serviceTest.imp.UserService;
+import com.zallpy.userapi.utils.generateFiles.GenerateCSVReport;
+import com.zallpy.userapi.utils.generateFiles.GenerateExcelReport;
+import com.zallpy.userapi.service.imp.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
@@ -34,7 +34,8 @@ public class UserController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public MessageResponseDTO create(@RequestBody @Valid UserDTO userDTO){
-                      return userService.createUser(userDTO);
+
+        return userService.createUser(userDTO);
     }
 
     @GetMapping(path = "/{id}")
@@ -87,8 +88,8 @@ public class UserController {
     }
     @GetMapping(value = "/alluserreportCSV")
     public void csvUsers(HttpServletResponse response) throws IOException {
-        List<UserDTO> users = (List<UserDTO>) userService.listALL();
-        GenerateCSVReport.writeUsers(response.getWriter(), users);
+
+        GenerateCSVReport.writeUsers(response.getWriter(), userService.listALL());
         response.setHeader("Content-Disposition", "attachment; filename=AllUsersCSVReport.csv");
     }
 

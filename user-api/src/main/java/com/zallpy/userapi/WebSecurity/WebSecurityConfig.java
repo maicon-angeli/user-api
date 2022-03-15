@@ -1,4 +1,4 @@
-package com.zallpy.userapi.WebSecurity;
+package com.zallpy.userapi.webSecurity;
 
 
 import org.springframework.context.annotation.Bean;
@@ -13,7 +13,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 
-
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -23,7 +22,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public BCryptPasswordEncoder encoder() {
         return new BCryptPasswordEncoder();
     }
-
 
 
     @Override
@@ -49,6 +47,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/exams").hasAnyRole("USERS", "MANAGERS")
                 .antMatchers(HttpMethod.GET, "/bloodtype").hasAnyRole("USERS", "MANAGERS")
                 .antMatchers(HttpMethod.GET, "/docs").hasAnyRole("MANAGERS")
+                .antMatchers(HttpMethod.GET, "/exams/allexamsreportCSV").permitAll()
                 .antMatchers("/managers").hasAnyRole("MANAGERS")
                 .anyRequest().authenticated()
                 .and()
