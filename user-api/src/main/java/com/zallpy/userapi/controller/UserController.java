@@ -10,17 +10,23 @@ import com.zallpy.userapi.service.imp.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.Link;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.criteria.Order;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.List;
+
+import static org.springframework.hateoas.server.reactive.WebFluxLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.reactive.WebFluxLinkBuilder.methodOn;
 
 
 @RestController
@@ -34,6 +40,8 @@ public class UserController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public MessageResponseDTO create(@RequestBody @Valid UserDTO userDTO){
+
+
 
         return userService.createUser(userDTO);
     }
@@ -60,11 +68,14 @@ public class UserController {
     @GetMapping
     @ResponseStatus
     public List<UserDTO> listallUser(){
-      return userService.listALL();
+
+        return userService.listALL();
     }
 
     @PutMapping(path = "/test/{id}")
     public MessageResponseDTO updateById(@Valid @PathVariable Long id, @RequestBody UserDTO userDTOImpl){
+
+
            return userService.updateById(id, userDTOImpl);
 
     }

@@ -1,4 +1,4 @@
-package com.zallpy.userapi.controllerTest;
+package com.zallpy.userapi.controllertest;
 
 import com.zallpy.userapi.controller.BloodTypeController;
 import com.zallpy.userapi.controller.DocumentsController;
@@ -73,8 +73,7 @@ public class UserControllerTest {
     @Test
     public void findAllSuccess() {
         Mockito.when(this.userService.listALL())
-                .thenReturn(Lists.newArrayList());
-
+          .thenReturn(Lists.newArrayList());
         Assert.assertTrue(this.userController.listallUser().isEmpty());
 
     }

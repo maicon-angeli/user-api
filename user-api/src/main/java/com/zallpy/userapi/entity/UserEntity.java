@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.hateoas.RepresentationModel;
 
 import javax.persistence.*;
 import java.util.List;
@@ -17,7 +18,7 @@ import java.util.List;
 @NoArgsConstructor
 @Table(name ="tb_users")
 
-public class UserEntity {
+public class UserEntity extends RepresentationModel<UserEntity> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

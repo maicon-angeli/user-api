@@ -10,7 +10,7 @@ import javax.validation.constraints.NotEmpty;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class DocumentsDTO {
+public class DocumentsDTO  {
 
 
     private Long id;

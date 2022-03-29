@@ -11,6 +11,8 @@ import com.zallpy.userapi.utils.Interface.Mappable;
 import com.zallpy.userapi.exception.ApiException;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.Link;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -37,13 +39,17 @@ public class UserService implements Mappable {
     public List<UserDTO> listALL(){
         List<UserEntity> allDocs = userRepository.findAll();
 
-        return map(allDocs, UserDTO.class);
+
+        return  map(allDocs, UserDTO.class);
 
     }
 
     public UserDTO findById(Long id)  {
         UserEntity usurious = userRepository.findById(id)
                 .orElseThrow(()-> new ApiException(HttpStatus.NOT_FOUND,"Usuário não encontrado"));
+
+
+
         return userMapper.toDTO(usurious);
     }
 
